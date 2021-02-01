@@ -8,20 +8,26 @@ import {
   Link
 } from "react-router-dom";
 import Checkout from './components/Checkout';
+import Login from './components/Login';
 
 function App() {
   return (
 
     <Router>
       <div className="app">
-      <Header/>
-        <Switch>
+      
 
-          <Route path="/checkout">            
+        <Switch>
+          <Route path="/login">            
+            <Login/>
+          </Route>
+          <Route path="/checkout">
+            <Header/>        
             <Checkout/>
           </Route>
 
-          <Route path="/">            
+          <Route path="/">
+            <Header/>
             <Home/>
           </Route>
           

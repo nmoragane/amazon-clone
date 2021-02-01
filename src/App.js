@@ -9,8 +9,33 @@ import {
 } from "react-router-dom";
 import Checkout from './components/Checkout';
 import Login from './components/Login';
+import { auth } from './firebase';
+import { useEffect } from 'react';
+import { useStateValue } from './StateProvider';
 
 function App() {
+  const [{}, dispatch] = useStateValue();
+
+  useEffect(() => {
+    auth.onAuthStateChanged(authUser => {
+      console.log('THE USER IS >>>', authUser);
+
+      if (authUser) {
+        //user is logged in
+        dispatch({
+          type: 'SET_USER',
+          user: authUser
+        })
+      } else {
+        //user is logged out
+        dispatch({
+          type: 'SET_USER',
+          user: null
+        })
+      }
+    })
+  },[])
+
   return (
 
     <Router>
